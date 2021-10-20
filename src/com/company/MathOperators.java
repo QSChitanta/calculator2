@@ -4,9 +4,6 @@ public class MathOperators {
 
     public static int calculate(String value1, String value2){
         if(value2.startsWith("*")){
-
-
-
             int number1 = Integer.parseInt(value1.substring(1));
             int number2 = Integer.parseInt(value2.substring(1));
 

@@ -11,11 +11,11 @@ public class Calculator {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter formula");
         return sc.nextLine();
-
     }
 
     public void calculate() {
         String input = retrieveUserInput();
+
         while (!input.equals("")) {
             String result = parseInput(input);
             System.out.println(result);
@@ -29,7 +29,6 @@ public class Calculator {
     }
 
     public void calculateDotOperators(List<String> terms) {
-
         for (int i = 1; i < terms.size(); i++) {
             String value1 = terms.get(i - 1);
             String value2 = terms.get(i);
@@ -43,7 +42,6 @@ public class Calculator {
 
                 checkAndAddOperators(terms);
             }
-
         }
     }
 

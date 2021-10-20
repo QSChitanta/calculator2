@@ -1,19 +1,14 @@
 package com.company;
-
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorTest {
-
     Calculator calculator = new Calculator();
 
     @Test
     public void getMatcher() {
-
         List<String> calculatorMatcher = calculator.getMatcher("10+2*4/2-3");
 
         Assert.assertEquals("10",calculatorMatcher.get(0));

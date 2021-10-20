@@ -3,9 +3,7 @@ package com.company;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 public class MathOperatorsTest {
-
     @Test
     public void testAddition() {
         int addition = MathOperators.addition(2, 5);
@@ -29,17 +27,19 @@ public class MathOperatorsTest {
         int division = MathOperators.division(37,17);
         Assert.assertEquals(2,division);
     }
-//
+
     @Test
     public void calculate_Addition() {
        int result = MathOperators.calculate("+5", "+1");
        Assert.assertEquals(6,result);
     }
+
     @Test
     public void calculate_Subtraction() {
         int result = MathOperators.calculate("+10","-5");
         Assert.assertEquals(5,result);
     }
+
     @Test
     public void calculate_Multiplication() {
         int result = MathOperators.calculate("+10","*2");
