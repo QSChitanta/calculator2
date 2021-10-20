@@ -7,36 +7,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-
-    private String retrieveUserInput() {
-        System.out.println("Enter formula" + "\n");
+    public String retrieveUserInput() {
         Scanner sc = new Scanner(System.in);
+        System.out.println("Enter formula");
         return sc.nextLine();
+
     }
 
     public void calculate() {
         String input = retrieveUserInput();
-        String result = parseInput(input);
-        System.out.println(result);
+        while (!input.equals("")) {
+            String result = parseInput(input);
+            System.out.println(result);
+            input = retrieveUserInput();
+        }
     }
 
-    public void calculateOperators(List<String> terms){
+    public void calculateOperators(List<String> terms) {
         calculateDotOperators(terms);
         calculateLineOperators(terms);
     }
 
-    public void calculateDotOperators(List<String> terms){
+    public void calculateDotOperators(List<String> terms) {
 
         for (int i = 1; i < terms.size(); i++) {
-            String value1 = terms.get(i-1);
+            String value1 = terms.get(i - 1);
             String value2 = terms.get(i);
 
-            if(hasDotOperator(value2)){
-                int result = MathOperators.calculate(value1,value2);
+            if (hasDotOperator(value2)) {
+                int result = MathOperators.calculate(value1, value2);
 
                 terms.remove(i);
                 String stringResult = Integer.toString(result);
-                terms.set(i-1,stringResult);
+                terms.set(i - 1, stringResult);
 
                 checkAndAddOperators(terms);
             }
@@ -44,17 +47,17 @@ public class Calculator {
         }
     }
 
-    public void calculateLineOperators(List<String> terms){
+    public void calculateLineOperators(List<String> terms) {
         for (int i = 1; i < terms.size(); i++) {
-            String value1 = terms.get(i-1);
+            String value1 = terms.get(i - 1);
             String value2 = terms.get(i);
 
-            if(hasLineOperator(value2)){
-                int result = MathOperators.calculate(value1,value2);
+            if (hasLineOperator(value2)) {
+                int result = MathOperators.calculate(value1, value2);
 
                 terms.remove(i);
                 String stringResult = Integer.toString(result);
-                terms.set(i-1,stringResult);
+                terms.set(i - 1, stringResult);
 
                 checkAndAddOperators(terms);
             }
@@ -80,10 +83,10 @@ public class Calculator {
 
     }
 
-    public void checkAndAddOperators(List<String> terms){
-        if(!terms.isEmpty()){
+    public void checkAndAddOperators(List<String> terms) {
+        if (!terms.isEmpty()) {
 
-            for(int i = 0; i<terms.size();i++) {
+            for (int i = 0; i < terms.size(); i++) {
                 String termElement = terms.get(i);
 
                 if (!hasOperator(termElement)) {
@@ -94,16 +97,15 @@ public class Calculator {
         }
     }
 
-    public boolean hasOperator(String term){
+    public boolean hasOperator(String term) {
         return term.startsWith("-") || term.startsWith("+") || term.startsWith("*") || term.startsWith("/");
     }
 
-    public boolean hasDotOperator(String value){
+    public boolean hasDotOperator(String value) {
         return (value.startsWith("*") || value.startsWith("/"));
     }
 
-    public boolean hasLineOperator(String value){
+    public boolean hasLineOperator(String value) {
         return (value.startsWith("+") || value.startsWith("-"));
     }
-
 }
