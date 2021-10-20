@@ -16,38 +16,57 @@ public class Calculator {
 
     public void calculate() {
         String input = retrieveUserInput();
-        parseInput(input);
+        String result = parseInput(input);
+        System.out.println(result);
     }
 
-    public void seperator(List<String> terms){
+    public void calculateOperators(List<String> terms){
+        calculateDotOperators(terms);
+        calculateLineOperators(terms);
+    }
+
+    public void calculateDotOperators(List<String> terms){
 
         for (int i = 1; i < terms.size(); i++) {
-            String value1 = terms.get(i-1); //=> "+10"
-            String value2 = terms.get(i);// = "+50"
+            String value1 = terms.get(i-1);
+            String value2 = terms.get(i);
 
-            char operator = value2.charAt(0);
-            Integer intValue1 = Integer.parseInt( value1.substring(1));
-            Integer intValue2 = Integer.parseInt(value2.substring(1));
+            if(hasDotOperator(value2)){
+                int result = MathOperators.calculate(value1,value2);
+
+                terms.remove(i);
+                String stringResult = Integer.toString(result);
+                terms.set(i-1,stringResult);
+
+                checkAndAddOperators(terms);
+            }
+
         }
     }
-    private void parseInput(String input) {
+
+    public void calculateLineOperators(List<String> terms){
+        for (int i = 1; i < terms.size(); i++) {
+            String value1 = terms.get(i-1);
+            String value2 = terms.get(i);
+
+            if(hasLineOperator(value2)){
+                int result = MathOperators.calculate(value1,value2);
+
+                terms.remove(i);
+                String stringResult = Integer.toString(result);
+                terms.set(i-1,stringResult);
+
+                checkAndAddOperators(terms);
+            }
+        }
+    }
+
+    private String parseInput(String input) {
         List<String> terms = getMatcher(input);
 
-        checkOperator(terms);
-
-        // TOODÖ
-        // rufe hier "checkOperator" mit den Terms auf
-
-                        // Dann machen wir weiter
-                        // Die Liste durchgehen
-                        //   1. Durchlauf ß alle Mal und Geteilt yeichen berechnen
-                        //   2. Durchlauf den Rest ( pölus und Minus)
-
-                        //  Solve(leftValue, rightValue)   // 10 operator 5
-                        //      Hole operator des rechten wertes
-                        //      Rufe einen der OpartorßFunktionen auf
-
-
+        checkAndAddOperators(terms);
+        calculateOperators(terms);
+        return terms.get(0);
     }
 
     public List<String> getMatcher(String input) {
@@ -61,19 +80,30 @@ public class Calculator {
 
     }
 
-    public void checkOperator(List<String> terms){
+    public void checkAndAddOperators(List<String> terms){
         if(!terms.isEmpty()){
 
-            String firstElement = terms.get(0);
+            for(int i = 0; i<terms.size();i++) {
+                String termElement = terms.get(i);
 
-            if(!hasOperator(firstElement)){
-                String newFirstElement = "+" + firstElement;
-                terms.set(0, newFirstElement);
+                if (!hasOperator(termElement)) {
+                    String newFirstElement = "+" + termElement;
+                    terms.set(i, newFirstElement);
+                }
             }
         }
     }
 
     public boolean hasOperator(String term){
-        return term.startsWith("-") || term.startsWith("+");
+        return term.startsWith("-") || term.startsWith("+") || term.startsWith("*") || term.startsWith("/");
     }
+
+    public boolean hasDotOperator(String value){
+        return (value.startsWith("*") || value.startsWith("/"));
+    }
+
+    public boolean hasLineOperator(String value){
+        return (value.startsWith("+") || value.startsWith("-"));
+    }
+
 }

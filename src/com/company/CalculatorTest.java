@@ -26,21 +26,70 @@ public class CalculatorTest {
     @Test
     public void hasOperatorTest() {
         boolean b = calculator.hasOperator("+19");
-        Assert.assertEquals(true, b);
+        Assert.assertTrue(b);
 
         b = calculator.hasOperator("-42");
-        Assert.assertEquals(true, b);
+        Assert.assertTrue(b);
 
-        b = calculator.hasOperator("007");
-        Assert.assertEquals(false, b);
+        b = calculator.hasOperator("7");
+        Assert.assertFalse(b);
+
+        b = calculator.hasOperator("*4");
+        Assert.assertTrue(b);
+
+        b = calculator.hasOperator("/2");
+        Assert.assertTrue(b);
     }
 
     @Test
     public void checkOperator() {
         List<String> testList = new ArrayList<>();
         testList.add("10");
-        calculator.checkOperator(testList);
+        calculator.checkAndAddOperators(testList);
 
         Assert.assertEquals("+10", testList.get(0));
+    }
+
+    @Test
+    public void calculateDotOperators() {
+        List<String> testList = new ArrayList<>();
+        testList.add("+10");
+        testList.add("+3");
+        testList.add("*5");
+
+        calculator.calculateDotOperators(testList);
+
+        Assert.assertEquals("+10",testList.get(0));
+        Assert.assertEquals("+15",testList.get(1));
+
+
+    }
+
+    @Test
+    public void calculateLineOperators() {
+        List<String> testList = new ArrayList<>();
+        testList.add("+10");
+        testList.add("+3");
+        testList.add("*5");
+
+        calculator.calculateLineOperators(testList);
+
+        Assert.assertEquals("+13",testList.get(0));
+        Assert.assertEquals("*5",testList.get(1));
+
+
+    }
+
+    @Test
+    public void calculateOperators() {
+        List<String> testList = new ArrayList<>();
+        testList.add("+10");
+        testList.add("+3");
+        testList.add("*5");
+
+        calculator.calculateOperators(testList);
+
+        Assert.assertEquals("+25",testList.get(0));
+        Assert.assertEquals(1 ,testList.size());
     }
 }

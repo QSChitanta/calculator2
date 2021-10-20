@@ -29,4 +29,26 @@ public class MathOperatorsTest {
         int division = MathOperators.division(37,17);
         Assert.assertEquals(2,division);
     }
+//
+    @Test
+    public void calculate_Addition() {
+       int result = MathOperators.calculate("+5", "+1");
+       Assert.assertEquals(6,result);
+    }
+    @Test
+    public void calculate_Subtraction() {
+        int result = MathOperators.calculate("+10","-5");
+        Assert.assertEquals(5,result);
+    }
+    @Test
+    public void calculate_Multiplication() {
+        int result = MathOperators.calculate("+10","*2");
+        Assert.assertEquals(20,result);
+    }
+
+    @Test
+    public void calculate_Division() {
+        int result = MathOperators.calculate("+10","/2");
+        Assert.assertEquals(5,result);
+    }
 }
