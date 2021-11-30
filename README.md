@@ -1,7 +1,13 @@
 # Calculator: for simple math operations
 
 ## Description
-This is a simple calculator that performs basic math operations with taking the point before line rule into account.
+This is a simple calculator that performs basic math operations with taking the point before line rule into account. 
+- info: Only the operators + - * / work in this calculator.
+
+### Example
+
+5*3+23-13+14
+5+2 (operator interchangable with other operators)
 
 ### Installation
 
