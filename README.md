@@ -7,7 +7,8 @@ This is a simple calculator that performs basic math operations with taking the 
 ### Example
 
 5*3+23-13+14
-5+2 (operator interchangable with other operators)
+
+or 5+2 (operator interchangable with other operators)
 
 ### Installation
 
